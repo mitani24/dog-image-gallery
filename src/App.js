@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { fetchImages } from "./api";
+
 const Header = () => {
   return (
     <header className="hero is-dark is-bold">
@@ -44,7 +47,13 @@ const Gallery = ({ urls }) => {
 };
 
 const Main = () => {
-  const urls = null;
+  const [urls, setUrls] = useState(null);
+
+  useEffect(() => {
+    fetchImages("shiba").then((urls) => {
+      setUrls(urls);
+    });
+  }, []);
 
   return (
     <main>
